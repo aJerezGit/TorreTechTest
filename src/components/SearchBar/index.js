@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { MdLocationSearching } from 'react-icons/md'
 import Axios from 'axios'
-import { List, Item } from './styles'
+import { List, Item, SearchContainer, Title, SearchInput, Icon, Label } from './styles'
+import { JobCard } from '../JobCard'
 
 function fetchSearchData (query) {
   // YOU MUST CHANGE THE QUERY POSITION
@@ -30,23 +31,23 @@ function fetchSearchData (query) {
         setMessage(resultNotFoundMsg)
         setLoading(false)
       }
-       
-        // .then(res => {
-        //   if (mounted) {
-        //     const resultNotFoundMsg = !res.data.results.lenght
-        //       ? 'There are no more search results. Try a new search'
-        //       : ''
-        //     setResults(res.data.results)
-        //     setMessage(resultNotFoundMsg)
-        //     setLoading(false)
-        //   }
-        // })
-        // .catch(error => {
-        //   if (Axios.isCancel(error) || error) {
-        //     setLoading(false)
-        //     console.log('error to request')
-        //   }
-        // })
+
+      // .then(res => {
+      //   if (mounted) {
+      //     const resultNotFoundMsg = !res.data.results.lenght
+      //       ? 'There are no more search results. Try a new search'
+      //       : ''
+      //     setResults(res.data.results)
+      //     setMessage(resultNotFoundMsg)
+      //     setLoading(false)
+      //   }
+      // })
+      // .catch(error => {
+      //   if (Axios.isCancel(error) || error) {
+      //     setLoading(false)
+      //     console.log('error to request')
+      //   }
+      // })
     }
     loadData()
 
@@ -72,14 +73,17 @@ export const SearchBar = () => {
         <List>
           {
             loading ? <Item key='loading'>loading</Item>
-              : results.map(result => <Item key={result.id}>
-                <a href="/">
-                  <h2>{result.objective}</h2>
-                  <p>{result.type}</p>
-                  <p>{result.status}</p>
-                  <p>{result.deadline}</p>
-                </a>
-              </Item>)
+              : results.map(result =>
+                <Item key={result.id}>
+                  <JobCard {...result} />
+                  {/* <a href='/'>
+                    <h2>{ result.objective}</h2>
+                    <p>{result.type}</p>
+                    <p>{result.status}</p>
+                    <p>{result.deadline}</p>
+                  </a> */}
+                </Item>
+              )
           }
         </List>
       )
@@ -91,18 +95,18 @@ export const SearchBar = () => {
   // }
 
   return (
-    <div>
-      <h2>Search Bar</h2>
-      <label htmlFor='search-input'>
-        <input
+    <SearchContainer>
+      <Title>Torre jobs</Title>
+      <Label htmlFor='search-input'>
+        <SearchInput
           type='text' value={query} id='search-input'
           placeholder='Search' onChange={e => setQuery(e.target.value)}
         />
-        <i>
+        <Icon>
           <MdLocationSearching />
-        </i>
-      </label>
+        </Icon>
+      </Label>
       {renderList()}
-    </div>
+    </SearchContainer>
   )
 }
