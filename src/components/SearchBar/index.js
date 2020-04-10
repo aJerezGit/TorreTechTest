@@ -12,7 +12,7 @@ function fetchSearchData (query) {
   const pageNo = 1
   const FilterSize = 10
   const aggregate = ''
-  const searchUrl = `https://search.torre.co/opportunities/_search/?offset=${pageNo}&size=${query || 10}&aggregate=${aggregate}`
+  const searchUrl = `https://search.torre.co/opportunities/_search/?offset=${pageNo}&size=${FilterSize}&aggregate=${aggregate}`
 
   useEffect(() => {
     let mounted = true

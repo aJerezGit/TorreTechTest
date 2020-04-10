@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNearScreen } from '../../hooks/useNearScreen'
 import { Article, ImgWrapper, Img, JobTitle, Skills } from './style'
+import { Link } from '@reach/router'
 
 const DEFAULT_IMAGE = 'https://www.loottis.com/wp-content/uploads/2014/10/default-img.gif'
 
@@ -23,7 +24,7 @@ export const JobCard = ({
             <ImgWrapper>
               <Img src={organizations[0].picture || DEFAULT_IMAGE} />
             </ImgWrapper>
-            <a href='/'>
+            <Link to={`/jobbio/${id}`}>
               <JobTitle>{objective}</JobTitle>
               <p>{type}</p>
               {skills.map((item) =>
@@ -33,7 +34,7 @@ export const JobCard = ({
               )}
               <p>{status}</p>
               <p>{deadline}</p>
-            </a>
+            </Link>
           </>
       }
     </Article>
