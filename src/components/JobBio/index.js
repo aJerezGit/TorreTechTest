@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import data from '../../data/db.json'
+import { PersonMiniCard } from '../PersonMiniCard'
 
 function fetchSearchData (id) {
   // YOU MUST CHANGE THE QUERY POSITION
@@ -48,7 +49,7 @@ function fetchSearchData (id) {
 
 export const JobBio = ({ id }) => {
   // const { job } = data[0] //fetchSearchData(id)
-  console.log(data[0])
+//   console.log(data[0])
   return (
     <>
       <div>
@@ -82,12 +83,11 @@ export const JobBio = ({ id }) => {
           if (item.visible) {
             return (
               <div key={item.id}>
-                <img src={item.person.picture} alt={item.person.name} />
-                <p>{item.person.name}</p>
-                <p>{item.person.professionalHeadline}</p>
+                <PersonMiniCard {...item.person} />
               </div>)
           }
         })}
+        <br />
         <h2>Why us?</h2>
         {data[0].details.map(item =>
           <div key={item.code}>

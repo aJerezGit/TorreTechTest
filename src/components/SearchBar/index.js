@@ -18,7 +18,6 @@ function fetchSearchData (query) {
     let mounted = true
     setLoading(true)
     const source = Axios.CancelToken.source()
-    // this.cancel = axios.CancelToken.soruce()
     const loadData = async () => {
       const response = await Axios.post(searchUrl, {
         CancelToken: source.token
